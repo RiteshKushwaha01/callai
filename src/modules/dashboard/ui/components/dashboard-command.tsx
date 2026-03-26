@@ -1,43 +1,47 @@
-import { useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useRouter } from 'next/navigation'
+import { useQuery } from '@tanstack/react-query'
+import { Dispatch, SetStateAction, useState } from 'react'
 
-import { 
+import {
   CommandResponsiveDialog,
-  CommandInput, 
-  CommandItem, 
+  CommandInput,
+  CommandItem,
   CommandList,
   CommandGroup,
-  CommandEmpty
-} from "@/components/ui/command";
-import { useTRPC } from "@/trpc/client";
-import { GeneratedAvatar } from "@/components/generated-avatar";
+  CommandEmpty,
+} from '@/components/ui/command'
+import { useTRPC } from '@/trpc/client'
+import { GeneratedAvatar } from '@/components/generated-avatar'
 
 interface Props {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-};
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+}
 
 export const DashboardCommand = ({ open, setOpen }: Props) => {
-  const router = useRouter();
-  const [search, setSearch] = useState("");
+  const router = useRouter()
+  const [search, setSearch] = useState('')
 
-  const trpc = useTRPC();
-  // const meetings = useQuery(
-  // //   trpc.meetings.getMany.queryOptions({
-  // //     search,
-  // //     pageSize: 100,
-  // //   })
-  // // );
-  // // const agents = useQuery(
-  // //   trpc.agents.getMany.queryOptions({
-  // //     search,
-  // //     pageSize: 100,
-  // //   })
-  // );
+  const trpc = useTRPC()
+  const meetings = useQuery(
+    trpc.meetings.getMany.queryOptions({
+      search,
+      pageSize: 100,
+    }),
+  )
+  const agents = useQuery(
+    trpc.agents.getMany.queryOptions({
+      search,
+      pageSize: 100,
+    }),
+  )
 
   return (
-    <CommandResponsiveDialog shouldFilter={false} open={open} onOpenChange={setOpen}>
+    <CommandResponsiveDialog
+      shouldFilter={false}
+      open={open}
+      onOpenChange={setOpen}
+    >
       <CommandInput
         placeholder="Find a meeting or agent..."
         value={search}
@@ -50,17 +54,17 @@ export const DashboardCommand = ({ open, setOpen }: Props) => {
               No meetings found
             </span>
           </CommandEmpty>
-          {/* {meetings.data?.items.map((meeting) => (
+          {meetings.data?.items.map((meeting) => (
             <CommandItem
               onSelect={() => {
-                router.push(`/meetings/${meeting.id}`);
-                setOpen(false);
+                router.push(`/meetings/${meeting.id}`)
+                setOpen(false)
               }}
               key={meeting.id}
             >
               {meeting.name}
             </CommandItem>
-          ))} */}
+          ))}
         </CommandGroup>
         <CommandGroup heading="Agents">
           <CommandEmpty>
@@ -68,14 +72,14 @@ export const DashboardCommand = ({ open, setOpen }: Props) => {
               No agents found
             </span>
           </CommandEmpty>
-          {/* {agents.data?.items.map((agent) => (
-            // <CommandItem
-            //   onSelect={() => {
-            //     router.push(`/agents/${agent.id}`);
-            //     setOpen(false);
-            //   }}
-            //   key={agent.id}
-            // >
+          {agents.data?.items.map((agent) => (
+            <CommandItem
+              onSelect={() => {
+                router.push(`/agents/${agent.id}`)
+                setOpen(false)
+              }}
+              key={agent.id}
+            >
               <GeneratedAvatar
                 seed={agent.name}
                 variant="botttsNeutral"
@@ -83,9 +87,9 @@ export const DashboardCommand = ({ open, setOpen }: Props) => {
               />
               {agent.name}
             </CommandItem>
-          ))} */}
+          ))}
         </CommandGroup>
       </CommandList>
-   </CommandResponsiveDialog>
-  );
-};
+    </CommandResponsiveDialog>
+  )
+}

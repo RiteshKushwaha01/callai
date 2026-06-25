@@ -46,7 +46,7 @@ export const DashboardUserButton = () => {
   if (isMobile) {
     return (
       <Drawer>
-        <DrawerTrigger className="rounded-lg border border-border/10 p-3 w-full flex items-center justify-between bg-white/5 hover:bg-white/10 overflow-hidden gap-x-2">
+        <DrawerTrigger className="rounded-lg border border-border/20 p-3 w-full flex items-center justify-between bg-sidebar-accent/20 hover:bg-sidebar-accent/40 overflow-hidden gap-x-2 text-sidebar-foreground">
           {data.user.image ? (
             <Avatar>
               <AvatarImage src={data.user.image} />
@@ -59,8 +59,12 @@ export const DashboardUserButton = () => {
             />
           )}
           <div className="flex flex-col gap-0.5 text-left overflow-hidden flex-1 min-w-0">
-            <p className="text-sm truncate w-full">{data.user.name}</p>
-            <p className="text-xs truncate w-full">{data.user.email}</p>
+            <p className="text-sm font-medium truncate w-full text-sidebar-foreground">
+              {data.user.name}
+            </p>
+            <p className="text-xs truncate w-full text-sidebar-foreground/80">
+              {data.user.email}
+            </p>
           </div>
           <ChevronDownIcon className="size-4 shrink-0" />
         </DrawerTrigger>
@@ -89,7 +93,7 @@ export const DashboardUserButton = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="rounded-lg border border-border/10 p-3 w-full flex items-center justify-between bg-black/90 hover:bg-black/60 overflow-hidden gap-x-2">
+      <DropdownMenuTrigger className="rounded-lg border border-border/20 p-3 w-full flex items-center justify-between bg-sidebar-accent/25 hover:bg-sidebar-accent/45 overflow-hidden gap-x-2 text-sidebar-foreground">
         {data.user.image ? (
           <Avatar>
             <AvatarImage src={data.user.image} />
@@ -102,8 +106,12 @@ export const DashboardUserButton = () => {
           />
         )}
         <div className="flex flex-col gap-0.5 text-left overflow-hidden flex-1 min-w-0">
-          <p className="text-sm truncate w-full">{data.user.name}</p>
-          <p className="text-xs truncate w-full">{data.user.email}</p>
+          <p className="text-sm font-medium truncate w-full text-sidebar-foreground">
+            {data.user.name}
+          </p>
+          <p className="text-xs truncate w-full text-sidebar-foreground/80">
+            {data.user.email}
+          </p>
         </div>
         <ChevronDownIcon className="size-4 shrink-0" />
       </DropdownMenuTrigger>

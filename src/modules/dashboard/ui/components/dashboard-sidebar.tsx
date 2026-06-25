@@ -114,7 +114,7 @@ export const DashboardSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="text-white">
+      <SidebarFooter className="text-sidebar-foreground">
         <DashboardTrial />
         <DashboardUserButton />
       </SidebarFooter>

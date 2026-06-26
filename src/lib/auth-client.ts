@@ -8,8 +8,6 @@ type PolarClientExtensions = {
 }
 
 const baseClient = createAuthClient({
-  // @polar-sh/better-auth plugin types are slightly out of sync with better-auth
-  // @ts-expect-error — runtime API is correct
   plugins: [polarClient()],
 })
 
